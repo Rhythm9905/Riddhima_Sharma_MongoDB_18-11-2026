@@ -1,0 +1,609 @@
+
+A1-Online Store Inventory Update
+
+C:\Users\Riddhima Sharama>cd C:\Users\Riddhima Sharama\Downloads\mongosh-2.10.0-win32-x64\mongosh-2.10.0-win32-x64\bin
+
+C:\Users\Riddhima Sharama\Downloads\mongosh-2.10.0-win32-x64\mongosh-2.10.0-win32-x64\bin>mongosh "mongodb+srv://cluster0.w3qron8.mongodb.net/" --apiVersion 1 --username 2024pceaitriddhima42_db_user
+Enter password: **********
+Current Mongosh Log ID: 6afd543dddac6e0677fc2244
+Connecting to:          mongodb+srv://<credentials>@cluster0.w3qron8.mongodb.net/?appName=mongosh+2.10.0
+Using MongoDB:          8.0.37 (API Version 1)
+Using Mongosh:          2.10.0
+mongosh 2.14.2 is available for download: https://www.mongodb.com/try/download/shell
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+Atlas atlas-r74qnc-shard-0 [primary] test> mongosh "mongodb+srv://cluster0.w3qron8.mongodb.net/" --apiVersion 1 --usernaAtlas atlas-r74qnc-shard-0 [primary] test> use shopDB
+|
+| db.products.insertMany([
+|   {
+|     _id: 1,
+|     name: "Wireless Mouse",
+|     category: "Accessories",
+|     price: 800,
+|     stock: 50,
+|     discontinued: false,
+|     oldCode: "WM-01"
+|   },
+|   {
+|     _id: 2,
+|     name: "Keyboard",
+|     category: "Accessories",
+|     price: 1500,
+|     stock: 30,
+|     discontinued: false,
+|     oldCode: "KB-02"
+|   },
+|   {
+|     _id: 3,
+|     name: "USB Cable",
+|     category: "Accessories",
+|     price: 200,
+|     stock: 100,
+|     discontinued: false
+|   },
+|   {
+|     _id: 4,
+|     name: "Laptop",
+|     category: "Computers",
+|     price: 55000,
+|     stock: 10,
+|     discontinued: false
+|   },
+|   {
+|     _id: 5,
+|     name: "Monitor",
+|     category: "Computers",
+|     price: 12000,
+|     stock: 15,
+|     discontinued: false
+|   },
+|   {
+|     _id: 6,
+|     name: "Old Floppy Drive",
+|     category: "Computers",
+|     price: 300,
+|     stock: 0,
+|     discontinued: true
+|   },
+|   {
+|     _id: 7,
+|     name: "Dial-up Modem",
+|     category: "Computers",
+|     price: 500,
+|     stock: 0,
+|     discontinued: true
+|   },
+|   {
+|     _id: 8,
+|     name: "CD Drive",
+|     category: "Computers",
+|     price: 400,
+|     stock: 0,
+|     discontinued: true
+|   }
+| ])
+switched to db shopDB
+Atlas atlas-r74qnc-shard-0 [primary] shopDB> show shopDB
+MongoshInvalidInputError: [COMMON-10001] 'shopDB' is not a valid argument for "show".
+Atlas atlas-r74qnc-shard-0 [primary] shopDB> db.products.find()
+
+Atlas atlas-r74qnc-shard-0 [primary] shopDB> db.createCollection("products")
+{ ok: 1 }
+Atlas atlas-r74qnc-shard-0 [primary] shopDB> db.products.insertMany([
+|   {
+|     _id: 1,
+|     name: "Wireless Mouse",
+|     category: "Accessories",
+|     price: 800,
+|     stock: 50,
+|     discontinued: false,
+|     oldCode: "WM-01"
+|   },
+|   {
+|     _id: 2,
+|     name: "Keyboard",
+|     category: "Accessories",
+|     price: 1500,
+|     stock: 30,
+|     discontinued: false,
+|     oldCode: "KB-02"
+|   },
+|   {
+|     _id: 3,
+|     name: "USB Cable",
+|     category: "Accessories",
+|     price: 200,
+|     stock: 100,
+|     discontinued: false
+|   },
+|   {
+|     _id: 4,
+|     name: "Laptop",
+|     category: "Computers",
+|     price: 55000,
+|     stock: 10,
+|     discontinued: false
+|   },
+|   {
+|     _id: 5,
+|     name: "Monitor",
+|     category: "Computers",
+|     price: 12000,
+|     stock: 15,
+|     discontinued: false
+|   },
+|   {
+|     _id: 6,
+|     name: "Old Floppy Drive",
+|     category: "Computers",
+|     price: 300,
+|     stock: 0,
+|     discontinued: true
+|   },
+|   {
+|     _id: 7,
+|     name: "Dial-up Modem",
+|     category: "Computers",
+|     price: 500,
+|     stock: 0,
+|     discontinued: true
+|   },
+|   {
+|     _id: 8,
+|     name: "CD Drive",
+|     category: "Computers",
+|     price: 400,
+|     stock: 0,
+|     discontinued: true
+|   }
+| ])
+{
+  acknowledged: true,
+  insertedIds: { '0': 1, '1': 2, '2': 3, '3': 4, '4': 5, '5': 6, '6': 7, '7': 8 }
+}
+Atlas atlas-r74qnc-shard-0 [primary] shopDB> db.products.updateOne(
+|   { name: "Keyboard" },
+|   { $set: { price: 1400 } }
+| )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Atlas atlas-r74qnc-shard-0 [primary] shopDB> db.products.updateOne(
+|   { name: "Wireless Mouse" },
+|   { $inc: { stock: 25 } }
+| )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Atlas atlas-r74qnc-shard-0 [primary] shopDB> db.products.updateMany(
+|   {},
+|   { $unset: { oldCode: "" } }
+| )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 8,
+  modifiedCount: 2,
+  upsertedCount: 0
+}
+Atlas atlas-r74qnc-shard-0 [primary] shopDB> db.products.replaceOne(
+|   { _id: 3 },
+|   {
+|     _id: 3,
+|     name: "USB-C Cable",
+|     category: "Accessories",
+|     price: 350,
+|     stock: 100,
+|     discontinued: false
+|   }
+| )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+Atlas atlas-r74qnc-shard-0 [primary] shopDB> db.products.deleteOne(
+|   { name: "Old Floppy Drive" }
+| )
+{ acknowledged: true, deletedCount: 1 }
+Atlas atlas-r74qnc-shard-0 [primary] shopDB> db.products.deleteMany(
+|   { discontinued: true }
+| )
+{ acknowledged: true, deletedCount: 2 }
+Atlas atlas-r74qnc-shard-0 [primary] shopDB> db.products.aggregate([
+|   {
+|     $match: {
+|       price: { $gte: 500 }
+|     }
+|   },
+|   {
+|     $group: {
+|       _id: "$category",
+|       totalStock: { $sum: "$stock" },
+|       avgPrice: { $avg: "$price" }
+|     }
+|   },
+|   {
+|     $sort: {
+|       totalStock: -1
+|     }
+|   }
+| ])
+[
+  { _id: 'Accessories', totalStock: 105, avgPrice: 1100 },
+  { _id: 'Computers', totalStock: 25, avgPrice: 33500 }
+
+
+A2-Student Record
+
+
+
+
+
+Atlas atlas-r74qnc-shard-0 [primary] shopDB> use collegeDB
+switched to db collegeDB
+Atlas atlas-r74qnc-shard-0 [primary] collegeDB> db.createCollection("students")
+{ ok: 1 }
+Atlas atlas-r74qnc-shard-0 [primary] collegeDB> db.students.insertOne({
+|   _id: 101,
+|   name: "Arun",
+|   dept: "CSE",
+|   marks: 78,
+|   scores: [
+|     { subject: "DBMS", mark: 85 },
+|     { subject: "Maths", mark: 70 }
+|   ]
+| })
+{ acknowledged: true, insertedId: 101 }
+Atlas atlas-r74qnc-shard-0 [primary] collegeDB> db.students.insertOne({
+|   _id: 101,
+|   name: "Another Arun",
+|   dept: "CSE",
+|   marks: 80,
+|   scores: [
+|     { subject: "DBMS", mark: 80 },
+|     { subject: "Maths", mark: 75 }
+|   ]
+| })
+MongoServerError: E11000 duplicate key error collection: collegeDB.students index: _id_ dup key: { _id: 101 }
+Atlas atlas-r74qnc-shard-0 [primary] collegeDB> db.students.insertMany([
+|   {
+|     _id: 102,
+|     name: "Bala",
+|     dept: "IT",
+|     marks: 66,
+|     scores: [
+|       { subject: "DBMS", mark: 60 },
+|       { subject: "Maths", mark: 72 }
+|     ]
+|   },
+|   {
+|     _id: 103,
+|     name: "Chitra",
+|     dept: "CSE",
+|     marks: 91,
+|     scores: [
+|       { subject: "DBMS", mark: 95 },
+|       { subject: "Maths", mark: 87 }
+|     ]
+|   },
+|   {
+|     _id: 104,
+|     name: "Divya",
+|     dept: "ECE",
+|     marks: 72,
+|     scores: [
+|       { subject: "DBMS", mark: 55 },
+|       { subject: "Maths", mark: 89 }
+|     ]
+|   },
+|   {
+|     _id: 105,
+|     name: "Eswar",
+|     dept: "IT",
+|     marks: 84,
+|     scores: [
+|       { subject: "DBMS", mark: 88 },
+|       { subject: "Maths", mark: 80 }
+|     ]
+|   },
+|   {
+|     _id: 106,
+|     name: "Farah",
+|     dept: "CSE",
+|     marks: 59,
+|     scores: [
+|       { subject: "DBMS", mark: 45 },
+|       { subject: "Maths", mark: 73 }
+|     ]
+|   }
+| ])
+{
+  acknowledged: true,
+  insertedIds: { '0': 102, '1': 103, '2': 104, '3': 105, '4': 106 }
+}
+Atlas atlas-r74qnc-shard-0 [primary] collegeDB> db.students.find({
+|   dept: "CSE"
+| })
+[
+  {
+    _id: 101,
+    name: 'Arun',
+    dept: 'CSE',
+    marks: 78,
+    scores: [ { subject: 'DBMS', mark: 85 }, { subject: 'Maths', mark: 70 } ]
+  },
+  {
+    _id: 103,
+    name: 'Chitra',
+    dept: 'CSE',
+    marks: 91,
+    scores: [ { subject: 'DBMS', mark: 95 }, { subject: 'Maths', mark: 87 } ]
+  },
+  {
+    _id: 106,
+    name: 'Farah',
+    dept: 'CSE',
+    marks: 59,
+    scores: [ { subject: 'DBMS', mark: 45 }, { subject: 'Maths', mark: 73 } ]
+  }
+]
+Atlas atlas-r74qnc-shard-0 [primary] collegeDB> db.students.find({
+|   dept: "CSE"
+| })
+[
+  {
+    _id: 101,
+    name: 'Arun',
+    dept: 'CSE',
+    marks: 78,
+    scores: [ { subject: 'DBMS', mark: 85 }, { subject: 'Maths', mark: 70 } ]
+  },
+  {
+    _id: 103,
+    name: 'Chitra',
+    dept: 'CSE',
+    marks: 91,
+    scores: [ { subject: 'DBMS', mark: 95 }, { subject: 'Maths', mark: 87 } ]
+  },
+  {
+    _id: 106,
+    name: 'Farah',
+    dept: 'CSE',
+    marks: 59,
+    scores: [ { subject: 'DBMS', mark: 45 }, { subject: 'Maths', mark: 73 } ]
+  }
+]
+Atlas atlas-r74qnc-shard-0 [primary] collegeDB> db,dropDatabase()
+ReferenceError: dropDatabase is not defined
+Atlas atlas-r74qnc-shard-0 [primary] collegeDB> db.dropDatabase()
+{ ok: 1, dropped: 'collegeDB' }
+Atlas atlas-r74qnc-shard-0 [primary] collegeDB> use collegeDB
+already on db collegeDB
+Atlas atlas-r74qnc-shard-0 [primary] collegeDB> db.createCollection("students")
+{ ok: 1 }
+Atlas atlas-r74qnc-shard-0 [primary] collegeDB> db.students.insertOne({
+|   _id: 101,
+|   name: "Arun",
+|   dept: "CSE",
+|   marks: 78,
+|   scores: [
+|     { subject: "DBMS", mark: 85 },
+|     { subject: "Maths", mark: 70 }
+|   ]
+| })
+{ acknowledged: true, insertedId: 101 }
+Atlas atlas-r74qnc-shard-0 [primary] collegeDB> db.students.insertOne({
+|   _id: 101,
+|   name: "Another Arun",
+|   dept: "CSE",
+|   marks: 80,
+|   scores: [
+|     { subject: "DBMS", mark: 80 },
+|     { subject: "Maths", mark: 75 }
+|   ]
+| })
+MongoServerError: E11000 duplicate key error collection: collegeDB.students index: _id_ dup key: { _id: 101 }
+Atlas atlas-r74qnc-shard-0 [primary] collegeDB> db.students.insertMany([
+|   {
+|     _id: 102,
+|     name: "Bala",
+|     dept: "IT",
+|     marks: 66,
+|     scores: [
+|       { subject: "DBMS", mark: 60 },
+|       { subject: "Maths", mark: 72 }
+|     ]
+|   },
+|   {
+|     _id: 103,
+|     name: "Chitra",
+|     dept: "CSE",
+|     marks: 91,
+|     scores: [
+|       { subject: "DBMS", mark: 95 },
+|       { subject: "Maths", mark: 87 }
+|     ]
+|   },
+|   {
+|     _id: 104,
+|     name: "Divya",
+|     dept: "ECE",
+|     marks: 72,
+|     scores: [
+|       { subject: "DBMS", mark: 55 },
+|       { subject: "Maths", mark: 89 }
+|     ]
+|   },
+|   {
+|     _id: 105,
+|     name: "Eswar",
+|     dept: "IT",
+|     marks: 84,
+|     scores: [
+|       { subject: "DBMS", mark: 88 },
+|       { subject: "Maths", mark: 80 }
+|     ]
+|   },
+|   {
+|     _id: 106,
+|     name: "Farah",
+|     dept: "CSE",
+|     marks: 59,
+|     scores: [
+|       { subject: "DBMS", mark: 45 },
+|       { subject: "Maths", mark: 73 }
+|     ]
+|   }
+| ])
+{
+  acknowledged: true,
+  insertedIds: { '0': 102, '1': 103, '2': 104, '3': 105, '4': 106 }
+}
+Atlas atlas-r74qnc-shard-0 [primary] collegeDB> db.students.find({
+|   dept: "CSE"
+| })
+[
+  {
+    _id: 101,
+    name: 'Arun',
+    dept: 'CSE',
+    marks: 78,
+    scores: [ { subject: 'DBMS', mark: 85 }, { subject: 'Maths', mark: 70 } ]
+  },
+  {
+    _id: 103,
+    name: 'Chitra',
+    dept: 'CSE',
+    marks: 91,
+    scores: [ { subject: 'DBMS', mark: 95 }, { subject: 'Maths', mark: 87 } ]
+  },
+  {
+    _id: 106,
+    name: 'Farah',
+    dept: 'CSE',
+    marks: 59,
+    scores: [ { subject: 'DBMS', mark: 45 }, { subject: 'Maths', mark: 73 } ]
+  }
+]
+Atlas atlas-r74qnc-shard-0 [primary] collegeDB> db.students.find({
+|   marks: { $gte: 75 }
+| })
+[
+  {
+    _id: 101,
+    name: 'Arun',
+    dept: 'CSE',
+    marks: 78,
+    scores: [ { subject: 'DBMS', mark: 85 }, { subject: 'Maths', mark: 70 } ]
+  },
+  {
+    _id: 103,
+    name: 'Chitra',
+    dept: 'CSE',
+    marks: 91,
+    scores: [ { subject: 'DBMS', mark: 95 }, { subject: 'Maths', mark: 87 } ]
+  },
+  {
+    _id: 105,
+    name: 'Eswar',
+    dept: 'IT',
+    marks: 84,
+    scores: [ { subject: 'DBMS', mark: 88 }, { subject: 'Maths', mark: 80 } ]
+  }
+]
+Atlas atlas-r74qnc-shard-0 [primary] collegeDB>
+(To exit, press Ctrl+C again or Ctrl+D or type .exit)
+Atlas atlas-r74qnc-shard-0 [primary] collegeDB> db.students.find({
+|   dept: { $in: ["CSE", "IT"] }
+| })
+[
+  {
+    _id: 101,
+    name: 'Arun',
+    dept: 'CSE',
+    marks: 78,
+    scores: [ { subject: 'DBMS', mark: 85 }, { subject: 'Maths', mark: 70 } ]
+  },
+  {
+    _id: 102,
+    name: 'Bala',
+    dept: 'IT',
+    marks: 66,
+    scores: [ { subject: 'DBMS', mark: 60 }, { subject: 'Maths', mark: 72 } ]
+  },
+  {
+    _id: 103,
+    name: 'Chitra',
+    dept: 'CSE',
+    marks: 91,
+    scores: [ { subject: 'DBMS', mark: 95 }, { subject: 'Maths', mark: 87 } ]
+  },
+  {
+    _id: 105,
+    name: 'Eswar',
+    dept: 'IT',
+    marks: 84,
+    scores: [ { subject: 'DBMS', mark: 88 }, { subject: 'Maths', mark: 80 } ]
+  },
+  {
+    _id: 106,
+    name: 'Farah',
+    dept: 'CSE',
+    marks: 59,
+    scores: [ { subject: 'DBMS', mark: 45 }, { subject: 'Maths', mark: 73 } ]
+  }
+]
+Atlas atlas-r74qnc-shard-0 [primary] collegeDB> db.students.find({
+|   scores: {
+|     $elemMatch: {
+|       subject: "DBMS",
+|       mark: { $gt: 80 }
+|     }
+|   }
+| })
+[
+  {
+    _id: 101,
+    name: 'Arun',
+    dept: 'CSE',
+    marks: 78,
+    scores: [ { subject: 'DBMS', mark: 85 }, { subject: 'Maths', mark: 70 } ]
+  },
+  {
+    _id: 103,
+    name: 'Chitra',
+    dept: 'CSE',
+    marks: 91,
+    scores: [ { subject: 'DBMS', mark: 95 }, { subject: 'Maths', mark: 87 } ]
+  },
+  {
+    _id: 105,
+    name: 'Eswar',
+    dept: 'IT',
+    marks: 84,
+    scores: [ { subject: 'DBMS', mark: 88 }, { subject: 'Maths', mark: 80 } ]
+  }
+]
+Atlas atlas-r74qnc-shard-0 [primary] collegeDB> db.students.find(
+|   {},
+|   { _id: 0, name: 1, marks: 1 }
+| ).sort(
+|   { marks: -1 }
+| ).limit(3)
+[
+  { name: 'Chitra', marks: 91 },
+  { name: 'Eswar', marks: 84 },
+  { name: 'Arun', marks: 78 }
+]
